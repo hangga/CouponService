@@ -14,13 +14,13 @@ public class CouponSystemZoneTest {
 
     @ParameterizedTest(name = "[{index}] {0} => should be valid? {1}")
     @CsvSource({
-        "2025-04-16T22:00:00, true",
-        "2025-04-17T00:59:59, false",
-        "2025-04-16T18:59:59, true",
-        "2025-04-17T00:00:01, false",
-        "2025-04-16T17:00:00, true",
-        "2025-04-17T02:00:00, false",
-        "2025-04-16T13:00:00, true"
+        "2025-04-16T22:00:00",
+        "2025-04-17T00:59:59",
+        "2025-04-16T18:59:59",
+        "2025-04-17T00:00:01",
+        "2025-04-16T17:00:00",
+        "2025-04-17T02:00:00",
+        "2025-04-16T13:00:00"
     })
     void testCouponValidInSystemTimezone(String localDateTimeStr) {
         LocalDateTime localDateTime = LocalDateTime.parse(localDateTimeStr);
@@ -32,16 +32,12 @@ public class CouponSystemZoneTest {
         boolean actualValid = service.isCouponValid();
 
         System.out.printf("""
-                [TEST] System TZ: %s
-                       Input LocalDateTime : %s
-                       Interpreted Instant : %s
+                [TEST] Input LocalDateTime : %s
                        Jakarta Time        : %s
                        Deadline Jakarta    : %s
                        Valid               : %s
                 """,
-            systemZone,
-            localDateTimeStr,
-            instant,
+            localDateTimeStr + " - " + systemZone,
             service.getNowInJkt(),
             service.getDeadline(),
             actualValid

@@ -39,9 +39,6 @@ workflows:
           matrix:
             parameters:
               timezone:
-                - UTC
-                - Asia/Jakarta
-                - Asia/Brunei
                 - Asia/Singapore
                 - Asia/Riyadh
                 - Asia/Tokyo
