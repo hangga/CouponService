@@ -25,7 +25,7 @@ public class CouponService {
     public boolean isCouponValid() {
         this.deadline = ZonedDateTime.of(2025, 4, 16, 23, 59, 59, 0, ZoneId.of("Asia/Jakarta"));
         this.nowInJkt = ZonedDateTime.now(clock)
-            .withZoneSameInstant(ZoneId.of("Asia/Jakarta"));
+            .withZoneSameInstant(ZoneId.of("UTC"));
 
         return !nowInJkt.isAfter(deadline);
     }
