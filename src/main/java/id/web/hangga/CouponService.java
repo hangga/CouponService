@@ -21,20 +21,6 @@ public class CouponService {
         ZonedDateTime now = ZonedDateTime.now(clock)
             .withZoneSameInstant(ZoneId.of("Asia/Jakarta"));
 
-        boolean isValid = !now.isAfter(deadline);
-
-        // Logging lebih informatif
-        System.out.printf("""
-                [CouponService] Now      : %s (%s)
-                                Deadline : %s (Asia/Jakarta)
-                                Valid?   : %s
-                """,
-            now,
-            ZoneId.systemDefault(),
-            deadline,
-            isValid
-        );
-
-        return isValid;
+        return !now.isAfter(deadline);
     }
 }
