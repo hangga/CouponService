@@ -14,6 +14,7 @@ public class CouponSystemZoneTest {
 
     @ParameterizedTest(name = "[{index}] {0} => should be valid? {1}")
     @CsvSource({
+        "2025-04-15T00:00:00",
         "2025-04-16T22:00:00",
         "2025-04-17T00:59:59",
         "2025-04-16T18:59:59",
