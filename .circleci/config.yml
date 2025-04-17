@@ -38,10 +38,4 @@ workflows:
       - test:
           matrix:
             parameters:
-              timezone:
-                - Asia/Singapore
-                - Asia/Riyadh
-                - Asia/Tokyo
-                - Europe/London
-                - Europe/Paris
-                - America/New_York
+              timezone: [Asia/Singapore, Asia/Riyadh, Asia/Tokyo, Europe/London, Europe/Paris, America/New_York]
