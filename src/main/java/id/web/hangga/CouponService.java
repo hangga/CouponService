@@ -8,10 +8,10 @@ public class CouponService {
 
     private final Clock clock;
     private ZonedDateTime deadline;
-    private ZonedDateTime nowInJkt;
+    private ZonedDateTime nowUtc;
 
-    public ZonedDateTime getNowInJkt() {
-        return nowInJkt;
+    public ZonedDateTime getNowUtc() {
+        return nowUtc;
     }
 
     public ZonedDateTime getDeadline() {
@@ -23,10 +23,11 @@ public class CouponService {
     }
 
     public boolean isCouponValid() {
-        this.deadline = ZonedDateTime.of(2025, 4, 16, 23, 59, 59, 0, ZoneId.of("Asia/Jakarta"));
-        this.nowInJkt = ZonedDateTime.now(clock)
-            .withZoneSameInstant(ZoneId.of("UTC"));
+        ZoneId zoneUtc = ZoneId.of("UTC");
+        this.deadline = ZonedDateTime.of(2025, 4, 16, 23, 59, 59, 0, zoneUtc);
+        this.nowUtc = ZonedDateTime.now(clock)
+            .withZoneSameInstant(zoneUtc);
 
-        return !nowInJkt.isAfter(deadline);
+        return !nowUtc.isAfter(deadline);
     }
 }

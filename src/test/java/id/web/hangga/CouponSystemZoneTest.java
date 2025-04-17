@@ -33,13 +33,13 @@ public class CouponSystemZoneTest {
         boolean actualValid = service.isCouponValid();
 
         System.out.printf("""
-                [TEST] Input LocalDateTime : %s
-                       Jakarta Time        : %s
-                       Deadline Jakarta    : %s
-                       Valid               : %s
+                [TEST] Input Local  : %s
+                       UTC Time     : %s
+                       Deadline UTC : %s
+                       Valid        : %s
                 """,
             localDateTimeStr + " - " + systemZone,
-            service.getNowInJkt(),
+            service.getNowUtc(),
             service.getDeadline(),
             actualValid
         );
