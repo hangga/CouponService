@@ -16,9 +16,11 @@ public class CouponSystemZoneTest {
 
     @BeforeAll
     static void printTableHeader() {
-        System.out.printf("| %-2s | %-24s | %-14s | %-26s | %-26s | %-12s |\n",
-            "#", "Input Local Time", "Zone", "UTC Time", "Deadline UTC", "Valid? ");
-        System.out.println("|----|--------------------------|----------------|----------------------------|----------------------------|---------------|");
+        System.out.println();
+        System.out.println("### Timezone: `" + ZoneId.systemDefault() + "`");
+        System.out.printf("| %-2s | %-24s | %-26s | %-26s | %-12s |\n",
+            "#", "Input Local Time", "UTC Time", "Deadline UTC", "Valid?");
+        System.out.println("|----|--------------------------|----------------------------|----------------------------|--------------|");
     }
 
     @ParameterizedTest(name = "[{index}] {0} => should be valid? {1}")
@@ -41,10 +43,9 @@ public class CouponSystemZoneTest {
         CouponService service = new CouponService(fixedClock);
         boolean actualValid = service.isCouponValid();
 
-        System.out.printf("| %-2d | %-24s | %-14s | %-26s | %-26s | %-12s |\n",
+        System.out.printf("| %-2d | %-24s | %-26s | %-26s | %-12s |\n",
             testIndex++,
             localDateTimeStr,
-            systemZone,
             service.getNowUtc(),
             service.getDeadline(),
             actualValid ? "✅ true" : "❌ false"
