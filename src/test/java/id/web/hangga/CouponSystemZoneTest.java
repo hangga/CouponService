@@ -72,7 +72,6 @@ public class CouponSystemZoneTest {
     void writeHtmlFile() {
         htmlTable.append("</table></body></html>");
 
-        // Misalnya HTML report JUnit ada di "build/reports/tests/test"
         Path junitHtmlDir = Paths.get("build", "reports", "tests", "test");
         Path outputPath = junitHtmlDir.resolve("coupon-timezone-report.html");
 
