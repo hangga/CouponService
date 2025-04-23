@@ -1,10 +1,16 @@
 # This config was automatically generated from your source code
 # Stacks detected: deps:java:.,tool:gradle:
 version: 2.1
+
 jobs:
-  test-java:
+  test:
+    parameters:
+      timezone:
+        type: string
     docker:
       - image: cimg/openjdk:17.0
+    environment:
+      TZ: << parameters.timezone >>
     steps:
       - checkout
       - run:
@@ -15,7 +21,8 @@ jobs:
       - restore_cache:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
       - run:
-          command: ./gradlew check
+          name: Run Tests in << parameters.timezone >>
+          command: ./gradlew test --info
       - store_test_results:
           path: build/test-results
       - save_cache:
@@ -24,19 +31,11 @@ jobs:
             - ~/.gradle/caches
       - store_artifacts:
           path: build/reports
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
-    steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+
 workflows:
-  build-and-test:
+  test-across-timezones:
     jobs:
-      - test-java
-    # - deploy:
-    #     requires:
-    #       - test-java
+      - test:
+          matrix:
+            parameters:
+              timezone: [Asia/Singapore, Asia/Riyadh, Asia/Tokyo, Europe/London, Europe/Paris, America/New_York]
